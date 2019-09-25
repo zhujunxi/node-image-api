@@ -3,6 +3,7 @@ var superagent = require('superagent');
 var charset = require('superagent-charset');
 charset(superagent);
 var cheerio = require('cheerio');
+var fs = require("fs");
 
 const baseUrl = "https://www.qqtn.com/"
 let route = "tx/weixintx_1.html"
@@ -32,5 +33,6 @@ function getData() {
 }
 
 getData().then(function (res) {
-    console.log(res);
+    let suffix = new Date().getTime()
+    fs.writeFileSync(`data_${suffix}.json`, JSON.stringify(res));
 })
